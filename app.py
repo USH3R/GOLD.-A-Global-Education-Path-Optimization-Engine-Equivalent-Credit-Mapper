@@ -4,7 +4,7 @@ from degree_parser import load_degree
 
 app = Flask(__name__)
 
-# Corrected to Master's Only
+# Options shown in the HTML dropdown
 DEGREE_OPTIONS = [
     "Master of Computer Science",
     "Master of Business Administration",
@@ -65,4 +65,45 @@ HTML_TEMPLATE = """
                     </div>
                     
                     <div class="result-line">
-                        <span class="label">Total Credits:</span> {{ result
+                        <span class="label">Total Credits:</span> {{ result.total_credits }}
+                    </div>
+                    
+                    <div class="result-line">
+                        <span class="label">Transferable Credits:</span> {{ result.transferable_credits }}
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
+"""
+
+@app.route("/", methods=["GET", "POST"])
+def home():
+    result = None
+    if request.method == "POST":
+        display_name = request.form.get("degree")
+        raw_input = request.form.get("completed_courses", "")
+        courses_taken = [c.strip() for c in raw_input.split(",") if c.strip()]
+        
+        # Match names for the JSON keys
+        search_name = display_name.lower().replace(" ", "_").strip()
+        degree_data = load_degree(search_name)
+
+        if not degree_data or "error" in degree_data:
+            degree_data = load_degree(display_name)
+
+        if not degree_data or "error" in degree_data:
+            result = {"degree": display_name, "error": f"Degree data for '{display_name}' not found."}
+        else:
+            try:
+                result = map_courses_to_degree(courses_taken, degree_data)
+                result["degree"] = display_name 
+            except Exception as e:
+                result = {"degree": display_name, "error": f"Error: {str(e)}"}
+
+    return render_template_string(HTML_TEMPLATE, degrees=DEGREE_OPTIONS, result=result)
+
+if __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0", port=5000)

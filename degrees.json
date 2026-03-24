@@ -1,9 +1,11 @@
 {
   "Bachelor of Computer Science": {
-    "total_credits": 120,
     "courses_needed": [
-      "Intro to Programming",
-      "Data Structures and Algorithms",
+      "Introduction to Computer Science",
+      "Programming I",
+      "Programming II",
+      "Data Structures",
+      "Algorithms",
       "Computer Architecture",
       "Operating Systems",
       "Databases",
@@ -11,52 +13,62 @@
       "Networks",
       "Artificial Intelligence",
       "Machine Learning",
-      "Computer Security",
+      "Capstone Project",
       "Elective 1",
       "Elective 2",
       "Elective 3",
-      "Capstone Project"
+      "Elective 4",
+      "Elective 5"
     ],
+    "total_credits": 120,
     "transferable_credits": 0
   },
   "Bachelor of Business Administration": {
-    "total_credits": 120,
     "courses_needed": [
       "Principles of Management",
       "Financial Accounting",
       "Managerial Accounting",
-      "Business Law",
       "Marketing Principles",
+      "Business Law",
       "Organizational Behavior",
-      "Economics",
-      "Business Ethics",
+      "Corporate Finance",
+      "Operations Management",
       "Human Resource Management",
+      "Economics I",
+      "Economics II",
+      "Business Ethics",
       "Strategic Management",
+      "Capstone Project",
       "Elective 1",
       "Elective 2",
       "Elective 3",
-      "Capstone Project"
+      "Elective 4"
     ],
+    "total_credits": 120,
     "transferable_credits": 0
   },
   "Bachelor of Psychology": {
-    "total_credits": 120,
     "courses_needed": [
       "Introduction to Psychology",
+      "Research Methods in Psychology",
+      "Statistics for Psychology",
       "Developmental Psychology",
       "Cognitive Psychology",
       "Abnormal Psychology",
       "Social Psychology",
       "Biopsychology",
-      "Research Methods",
-      "Statistics for Psychology",
+      "Personality Psychology",
       "Psychological Testing",
-      "Clinical Psychology",
+      "Counseling Techniques",
+      "Health Psychology",
+      "Capstone Project",
       "Elective 1",
       "Elective 2",
       "Elective 3",
-      "Capstone Project"
+      "Elective 4",
+      "Elective 5"
     ],
+    "total_credits": 120,
     "transferable_credits": 0
   }
 }

@@ -60,7 +60,8 @@ def load_degree(degree_name: str) -> Dict[str, Any]:
             "transferable_credits": 0,
             "error": f"Degree '{degree_name}' not found in database."
         }
-    return degreeimport json
+    return degree
+    import json
 import os
 
 # Path to the degrees database

@@ -1,4 +1,28 @@
-def map_courses_to_degree(courses, degree):
+# mapper.py
+# Maps completed courses to degree requirements
+
+def map_courses_to_degree(courses, degree_info):
+    """
+    Given a list of completed courses and a degree_info dictionary,
+    returns a list of courses still needed to complete the degree.
+    """
+    required_courses = degree_info.get("courses", [])
+    courses_needed = [course for course in required_courses if course not in courses]
+    return courses_needed
+
+
+def calculate_degree_stats(courses_needed, degree_info):
+    """
+    Returns a dictionary with total duration, cost, and transferable credits
+    based on the courses needed.
+    """
+    num_courses = len(courses_needed)
+    stats = {
+        "total_duration_weeks": num_courses * degree_info.get("duration_weeks", 0),
+        "total_cost": num_courses * degree_info.get("cost", 0),
+        "transferable_credits": num_courses * degree_info.get("transferable_credits", 0)
+    }
+    return statsdef map_courses_to_degree(courses, degree):
     mapped = []
     transferable_credits = 0
 

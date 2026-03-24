@@ -1,4 +1,41 @@
 #!/bin/bash
+
+echo "-------------------------------------------"
+echo "Starting Gold app..."
+echo "-------------------------------------------"
+
+# 1️⃣ Create Python virtual environment if not exists
+if [ ! -d "venv" ]; then
+    echo "Creating Python virtual environment..."
+    python3 -m venv venv
+fi
+
+# 2️⃣ Activate virtual environment
+source venv/bin/activate
+
+# 3️⃣ Upgrade pip
+echo "Upgrading pip..."
+pip install --upgrade pip
+
+# 4️⃣ Install required Python packages
+echo "Installing required packages..."
+pip install flask requests beautifulsoup4 pandas
+
+# 5️⃣ Check if app.py exists
+if [ ! -f "app.py" ]; then
+    echo "Error: app.py not found in repo root!"
+    exit 1
+fi
+
+# 6️⃣ Inform user and run Flask app
+echo "-------------------------------------------"
+echo "Access the app in your browser:"
+echo "Use the Codespaces 'Ports' panel to open in a new tab."
+echo "-------------------------------------------"
+
+# 7️⃣ Start Flask app
+#    host 0.0.0.0 allows Codespaces to expose the port to browser
+FLASK_APP=app.py flask run --host=0.0.0.0 --port=5000#!/bin/bash
 # run.sh — starts the Gold app in Codespaces with one command
 
 echo "-------------------------------------------"

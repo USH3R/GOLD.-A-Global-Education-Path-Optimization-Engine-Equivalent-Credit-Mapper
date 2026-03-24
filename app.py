@@ -1,8 +1,10 @@
 from flask import Flask, request, jsonify, render_template_string
+from degree_parser import load_degree, normalize_degree
 from mapper import map_courses_to_degree
 
 app = Flask(__name__)
 
+# Only three available degrees
 DEGREE_OPTIONS = [
     "Bachelor of Computer Science",
     "Bachelor of Business Administration",
@@ -34,117 +36,9 @@ def home():
     result = None
     if request.method == "POST":
         degree_name = request.form.get("degree")
-        result = map_courses_to_degree(degree_name)
+        degree_normalized = normalize_degree(degree_name)
+        result = map_courses_to_degree(degree_normalized)
     return render_template_string(HTML_TEMPLATE, degrees=DEGREE_OPTIONS, result=result)
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)from flask import Flask, render_template, request, jsonify
-from crawler import crawl_all
-from degreeparser import load_degree, normalize_degree
-from mapper import map_courses_to_degree
-from optimizer import optimize_path
-
-app = Flask(__name__)
-
-@app.route("/")
-def index():
-    return render_template("index.html")
-
-@app.route("/optimize", methods=["POST"])
-def optimize():
-    try:
-        target_degree = request.form.get("degree", "").strip()
-        normalized_degree = normalize_degree(load_degree(target_degree))
-        courses = crawl_all()
-        mapped = map_courses_to_degree(courses, normalized_degree)
-        optimized = optimize_path(mapped)
-        return jsonify(optimized)
-    except Exception as e:
-        # Always return something JSON-safe if something goes wrong
-        return jsonify({
-            "degree": target_degree if 'target_degree' in locals() else "Unknown",
-            "courses_needed": [],
-            "total_cost": 0,
-            "total_duration_weeks": 0,
-            "transferable_credits": 0,
-            "error": str(e)
-        })
-
-if __name__ == "__main__":
-    # Run in debug mode on all interfaces so Codespaces can open it
-    app.run(debug=True, host="0.0.0.0", port=5000)# degreeparser.py
-
-def load_degree(degree_name=None):
-    """
-    Normally, this would parse a degree from a file or database.
-    For testing, we just return the normalized string.
-    """
-    if degree_name:
-        return degree_name.strip()
-    return "Business Administration"
-
-def normalize_degree(degree_name):
-    """
-    Normalize the degree name for consistent mapping.
-    """
-    degree_name = degree_name.lower().strip()
-    if "mba" in degree_name:
-        return "business administration"
-    if "cyber" in degree_name:
-        return "cybersecurity"
-    if "cs" in degree_name or "computer" in degree_name:
-        return "computer_science"
-    return degree_namefrom flask import Flask, render_template, request, jsonify
-
-from crawler import crawl_all
-from degreeparser import load_degree, normalize_degree
-from mapper import map_courses_to_degree
-from optimizer import optimize_path
-
-app = Flask(__name__)
-
-
-@app.route("/")
-def index():
-    return render_template("index.html")
-
-
-@app.route("/optimize", methods=["POST"])
-def optimize():
-    target_degree = request.form.get("degree")
-
-    try:
-        # STEP 1: degree
-        degree = normalize_degree(load_degree(target_degree))
-        print("DEGREE:", degree)
-
-        # STEP 2: courses
-        courses = crawl_all()
-        print("COURSES:", courses)
-
-        # STEP 3: mapping
-        mapped = map_courses_to_degree(courses, degree)
-        print("MAPPED:", mapped)
-
-        # STEP 4: optimization
-        optimized = optimize_path(mapped)
-        print("OPTIMIZED:", optimized)
-
-        return jsonify(optimized)
-
-    except Exception as e:
-        print("🔥 FULL ERROR:", str(e))
-
-        # RETURN REAL ERROR TO BROWSER
-        return jsonify({
-            "degree": target_degree,
-            "error": str(e),
-            "courses_needed": [],
-            "total_cost": 0,
-            "total_duration_weeks": 0,
-            "transferable_credits": 0
-        }), 500
-
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)

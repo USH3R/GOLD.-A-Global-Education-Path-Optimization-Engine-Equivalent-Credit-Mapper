@@ -1,160 +1,52 @@
+# mapper.py
 from degree_parser import load_degree
 
-def map_courses_to_degree(degree_name):
-    degree_data = load_degree(degree_name)
-    if "error" in degree_data:
-        return {
-            "degree": degree_name,
-            "courses_needed": [],
-            "total_credits": 0,
-            "error": degree_data["error"]
-        }
-    courses = degree_data.get("courses", [])
-    total_credits = sum(c.get("credits", 0) for c in courses)
-    return {
-        "degree": degree_name,
-        "courses_needed": courses,
-        "total_credits": total_credits
-    }
-    
-    from degree_parser import load_degree
-
-def map_courses_to_degree(degree_name):
-    """Return all courses for the requested degree."""
-    degree_data = load_degree(degree_name)
-    if "error" in degree_data:
-        return {
-            "degree": degree_name,
-            "courses_needed": [],
-            "total_credits": 0,
-            "error": degree_data["error"]
-        }
-    courses = degree_data.get("courses", [])
-    total_credits = sum(c.get("credits", 0) for c in courses)
-    return {
-        "degree": degree_name,
-        "courses_needed": courses,
-        "total_credits": total_credits
-    }# mapper.py
-# Maps completed courses to degree requirements
-
-def map_courses_to_degree(courses, degree_info):
+def calculate_stats(degree_data):
     """
-    Given a list of completed courses and a degree_info dictionary,
-    returns a list of courses still needed to complete the degree.
+    Example helper to calculate summary stats for a degree.
     """
-    required_courses = degree_info.get("courses", [])
-    courses_needed = [course for course in required_courses if course not in courses]
-    return courses_needed
-
-
-def calculate_degree_stats(courses_needed, degree_info):
-    """
-    Returns a dictionary with total duration, cost, and transferable credits
-    based on the courses needed.
-    """
-    num_courses = len(courses_needed)
     stats = {
-        "total_duration_weeks": num_courses * degree_info.get("duration_weeks", 0),
-        "total_cost": num_courses * degree_info.get("cost", 0),
-        "transferable_credits": num_courses * degree_info.get("transferable_credits", 0)
+        "degree": degree_data.get("name", "Unknown"),
+        "courses_needed": degree_data.get("courses", []),
+        "total_credits": sum(c.get("credits", 0) for c in degree_data.get("courses", [])),
+        "transferable_credits": degree_data.get("transferable_credits", 0),
     }
     return stats
-    
-    def map_courses_to_degree(courses, degree):
+
+def map_courses_to_degree(courses, degree_name):
+    """
+    Map available courses to the selected degree.
+    """
     mapped = []
     transferable_credits = 0
 
-    keywords = degree.get("keywords", [])
+    degree_data = load_degree(degree_name)
 
-    print("DEBUG KEYWORDS:", keywords)
+    # Check if degree exists
+    if "error" in degree_data:
+        return {
+            "degree": degree_name,
+            "courses_needed": [],
+            "total_credits": 0,
+            "transferable_credits": 0,
+            "error": degree_data["error"]
+        }
 
-    for course in courses:
-        title = course.get("title", "").lower()
-        print("CHECKING COURSE:", title)
+    # Map courses that match degree requirements
+    required_courses = degree_data.get("courses", [])
+    for course in required_courses:
+        course_name = course.get("name")
+        course_credits = course.get("credits", 0)
+        # Check if course is in available courses
+        if course_name in courses:
+            transferable_credits += course_credits
+        else:
+            mapped.append(course)
 
-        match_score = 0
-
-        for keyword in keywords:
-            if keyword.lower() in title:
-                match_score += 1
-
-        print("MATCH SCORE:", match_score)
-
-        if match_score > 0:
-            mapped.append({
-                "title": course["title"],
-                "credits": course.get("credits", 3),
-                "cost": course.get("cost", 0),
-                "duration_weeks": course.get("duration_weeks", 0),
-                "score": match_score
-            })
-
-            transferable_credits += course.get("credits", 3)
-
-    print("MAPPED COURSES:", mapped)
-
+    # Return mapping stats
     return {
-        "degree": degree.get("name", "Unknown"),
-        "mapped_courses": mapped,
-        "transferable_credits": transferable_credits
-    }def map_courses_to_degree(courses, degree):
-    mapped = []
-    transferable_credits = 0
-
-    keywords = degree.get("keywords", [])
-
-    for course in courses:
-        title = course.get("title", "").lower()
-
-        match_score = 0
-
-        # Check every keyword against the course title
-        for keyword in keywords:
-            if keyword in title:
-                match_score += 1
-
-        # If ANY match, include the course
-        if match_score > 0:
-            mapped.append({
-                "title": course["title"],
-                "credits": course.get("credits", 3),
-                "cost": course.get("cost", 0),
-                "duration_weeks": course.get("duration_weeks", 0),
-                "score": match_score
-            })
-
-            transferable_credits += course.get("credits", 3)
-
-    return {
-        "degree": degree.get("name", "Unknown"),
-        "mapped_courses": mapped,
-        "transferable_credits": transferable_credits
-    }def map_courses_to_degree(courses, degree):
-    mapped = []
-    transferable_credits = 0
-
-    # Extract keywords from degree name
-    degree_keywords = degree.get("name", "").lower().split()
-
-    for course in courses:
-        title = course.get("title", "").lower()
-
-        # Simple keyword match (loose matching)
-        match_score = sum(1 for word in degree_keywords if word in title)
-
-        if match_score > 0:
-            mapped.append({
-                "title": course["title"],
-                "credits": course.get("credits", 3),
-                "cost": course.get("cost", 0),
-                "duration_weeks": course.get("duration_weeks", 0),
-                "score": match_score
-            })
-            transferable_credits += course.get("credits", 3)
-
-    return {
-        "degree": degree.get("name", "Unknown"),
-        "mapped_courses": mapped,
+        "degree": degree_data.get("name", degree_name),
+        "courses_needed": mapped,
+        "total_credits": sum(c.get("credits", 0) for c in required_courses),
         "transferable_credits": transferable_credits
     }

@@ -121,7 +121,7 @@ If You Are Using a Random Public Terminal
 Public terminals do not automatically have this project. You must first download or clone the repository.  
 A. Option A — Clone with Git  
 Type:  
-    git clone https://github.com/USH3R/GOLD.-A-Global-Education-Path-Optimization-Engine-Equivalent-Credit- Mapper.git  
+    git clone https://github.com/USH3R/GOLD.-A-Global-Education-Path-Optimization-Engine-Equivalent-Credit-Mapper.git  
     cd GOLD.-A-Global-Education-Path-Optimization-Engine-Equivalent-Credit-Mapper  
     bash run.sh  
 B. Option B — Download ZIP  

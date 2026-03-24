@@ -1,4 +1,30 @@
 import json
+import os
+
+DEGREES_FILE = os.path.join(os.path.dirname(__file__), "degrees.json")
+
+def load_degrees():
+    """Load all degrees from the JSON database."""
+    with open(DEGREES_FILE, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+def normalize_degree(degree_name):
+    """Normalize user input to match degree names in JSON."""
+    degree_name = degree_name.strip().lower()
+    degrees = load_degrees()
+    for d in degrees.keys():
+        if d.lower() == degree_name:
+            return d
+    return None
+
+def load_degree(degree_name):
+    """Return degree courses and metadata for a given degree name."""
+    degrees = load_degrees()
+    normalized = normalize_degree(degree_name)
+    if normalized:
+        return degrees[normalized]
+    else:
+        return {"error": f"Degree '{degree_name}' not found in database."}import json
 import difflib
 from typing import Optional, Dict, Any
 

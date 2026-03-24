@@ -1,45 +1,42 @@
 #!/bin/bash
 
-# -------------------------------------------
-# Gold App: Run Script for GitHub Codespaces
-# -------------------------------------------
-
 echo "-------------------------------------------"
 echo "Starting Gold app..."
 echo "-------------------------------------------"
 
-# Create virtual environment if it doesn't exist
+# --- Step 1: Create virtual environment if it doesn't exist ---
 if [ ! -d "venv" ]; then
     echo "Creating Python virtual environment..."
     python3 -m venv venv
 fi
 
-# Activate virtual environment
+# --- Step 2: Activate virtual environment ---
 source venv/bin/activate
 
-# Upgrade pip
+# --- Step 3: Upgrade pip ---
 echo "Upgrading pip..."
 pip install --upgrade pip
 
-# Install dependencies
+# --- Step 4: Install required Python packages ---
 echo "Installing required packages..."
 pip install flask requests beautifulsoup4 pandas
 
-# Ensure Flask app is found
+# --- Step 5: Ensure app.py exists ---
 if [ ! -f "app.py" ]; then
     echo "Error: app.py not found in repo root!"
+    echo "Make sure you have renamed UI.py to app.py."
     exit 1
 fi
 
-# Inform user how to access app
+# --- Step 6: Set Flask environment variables ---
+export FLASK_APP=app.py
+export FLASK_ENV=development
+
+# --- Step 7: Run Flask app ---
 echo "-------------------------------------------"
-echo "Access the app in your browser:"
+echo "Access the app in your browser using the Codespaces 'Ports' panel:"
 echo "http://localhost:5000"
-echo "Use the Codespaces 'Ports' panel to open in a new tab."
 echo "-------------------------------------------"
 
-# Run Flask app
-export FLASK_APP=app.py
-export FLASK_RUN_HOST=0.0.0.0
-export FLASK_RUN_PORT=5000
-flask run
+# Open in default browser if Codespaces supports it
+flask run --host=0.0.0.0 --port=5000

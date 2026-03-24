@@ -1,4 +1,21 @@
-# degree_parser.py
+import difflib
+
+# Normalize strings: lowercase and strip spaces
+def normalize_degree(name: str) -> str:
+    return name.strip().lower()
+
+# Find degree in database
+def find_degree(degree_name: str, degrees: dict):
+    normalized_name = normalize_degree(degree_name)
+    # Try exact match
+    for key in degrees:
+        if normalize_degree(key) == normalized_name:
+            return degrees[key]
+    # Try close match
+    matches = difflib.get_close_matches(normalized_name, [k.lower() for k in degrees.keys()])
+    if matches:
+        return degrees[matches[0]]
+    return None# degree_parser.py
 # Handles loading and normalizing degree data
 
 # Sample degree database

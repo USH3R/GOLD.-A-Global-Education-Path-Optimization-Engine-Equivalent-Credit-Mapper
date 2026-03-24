@@ -1,4 +1,17 @@
-**Nine Files / Structure**  
+![Python](https://img.shields.io/badge/Python-3.12-blue)  
+![Flask](https://img.shields.io/badge/Flask-Web_App-black)  
+![HTML](https://img.shields.io/badge/Frontend-HTML/CSS-orange)  
+![JSON](https://img.shields.io/badge/Data-JSON-green)  
+![Education](https://img.shields.io/badge/Domain-Education-blue)  
+![EdTech](https://img.shields.io/badge/Category-EdTech-purple)  
+![Credit Mapping](https://img.shields.io/badge/Focus-Credit%20Mapping-green)  
+![Optimization](https://img.shields.io/badge/Engine-Path%20Optimization-orange)  
+![Career Mobility](https://img.shields.io/badge/Impact-Career%20Mobility-brightgreen)  
+![Cost Reduction](https://img.shields.io/badge/Goal-Reduce%20Education%20Cost-red)  
+![Time Efficiency](https://img.shields.io/badge/Goal-Minimize%20Time-yellow)  
+![Accessibility](https://img.shields.io/badge/Impact-Accessible%20Education-lightgrey)  
+  
+**Files Structure**  
   
 /GOLD.-A-Global-Education-Path-Optimization-Engine-Equivalent-Credit-Mapper  
 │  
@@ -58,7 +71,7 @@
       - JSON output for prototyping  
       - Sample courses for testing mapping & optimization modules  
     
-**Folder Diagram Flow**  
+**Folder Diagram Flow (Proposal)**  
 + gold/  
   |  
   +-- crawler.py      -> Scrapes courses (JSON output)  
@@ -87,3 +100,38 @@ Optional: Google Translate API for foreign universities
     5. UI prototype: CLI or minimal Flask app.  
     6. Test locally with example_courses.json.  
     7. Expand crawler to multiple sources (international + MOOCs).  
+
+🏃‍♂️ Run the SHOCKACON Demo
+
+    Run in GitHub Codespaces (Recommended)
+    Open this repository on GitHub.
+    Click Code → Codespaces → Create Codespace on main.
+    Wait for the environment to load.
+    Open the terminal inside Codespaces.
+    Run: bash run.sh
+
+    Run Manually Inside the Repository (Local Machine)
+    If you downloaded or cloned the repository:
+    Open a terminal.
+    Navigate to the project folder.
+    Example: cd GOLD.-A-Global-Education-Path-Optimization-Engine-Equivalent-Credit-Mapper
+    Run the launcher: bash run.sh
+
+    If You Are Using a Random Public Terminal
+    Public terminals do not automatically have this project. You must first download or clone the repository.
+    A. Option A — Clone with Git
+    Type:
+    git clone https://github.com/USH3R/GOLD.-A-Global-Education-Path-Optimization-Engine-Equivalent-Credit-Mapper.git
+    cd GOLD.-A-Global-Education-Path-Optimization-Engine-Equivalent-Credit-Mapper
+    bash run.sh
+    B. Option B — Download ZIP
+    Click Code → Download ZIP on GitHub.
+    Extract the folder from the ZIP file. Then,
+    Open a terminal in that folder. Run / Type: bash run.sh
+
+    Quick Start Command
+    This command is only for use inside a Terminal (like the one in Codespaces, terminal, or on your local machine).
+    Verify Your Location: Ensure your terminal is currently pointed at the project directory;
+    You should see GOLD.-A-Global-Education-Path-Optimization-Engine-Equivalent-Credit-Mapper in your command prompt.
+    If you have already performed the setup in steps 1, 2, or 3 and just need to restart the application, type:
+    bash run.sh

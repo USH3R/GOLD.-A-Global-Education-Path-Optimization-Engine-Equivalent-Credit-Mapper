@@ -1,0 +1,86 @@
+Nine Files / Structure  
+gold/  
+│  
+├── README.md                 # Architecture, workflow, tech stack, modules, example data  
+├── crawler.py                # Crawls MOOCs, ACE/NCCRS, CLEP, Study.com, Saylor, etc.  
+├── degree_parser.py          # Loads degree requirements & normalizes course names  
+├── mapping.py                # Maps courses to degree requirements, calculates credits  
+├── optimizer.py              # Path optimization: max credits, min cost, min time  
+├── ui.py                     # Web dashboard or CLI for input/output  
+├── config.json               # Configuration file: user constraints, API keys, settings  
+├── static/  
+│   ├── style.css             # UI styling for web dashboard  
+│   └── script.js             # Frontend interactivity  
+└── data/  
+    └── example_courses.json  # Sample JSON output from crawler for testing  
+
+File Purposes  
+README.md – Provides overview:  
+Project title & description  
+Architecture diagram (modules & data flow)  
+Folder organization  
+Example JSON structures for courses and degrees  
+Tech stack  
+Instructions to run  
+crawler.py – Collects courses from:  
+MOOCs: Coursera, edX, Study.com  
+ACE/NCCRS credit equivalence  
+CLEP/DSST  
+Optional: international universities with translation  
+degree_parser.py – Loads degree requirements:  
+University catalogs, program pages  
+Normalizes course names & credit requirements  
+Produces standard JSON for mapping  
+mapping.py – Maps courses to degree requirements:  
+Matches user’s available courses to degree needs  
+Tracks transferable credits, cost, and duration  
+optimizer.py – Builds optimized education paths:  
+Ranks paths by max transferable credits, minimal cost, shortest time  
+Handles constraints: budget, duration, preferred institutions  
+ui.py – Web dashboard (Flask/FastAPI) or CLI interface:  
+Input: target degree, user constraints  
+Output: ranked degree paths  
+Connects frontend static files (style.css + script.js)  
+config.json – Settings:  
+User preferences: budget, max duration  
+API keys (if needed)  
+International translation toggle  
+Default degree search filters  
+static/style.css – Minimal CSS for web dashboard:  
+Tables, buttons, input fields  
+Clean and functional, not aesthetic-heavy  
+static/script.js – Basic frontend interactivity:  
+Handles form submission  
+Displays JSON results or formatted tables  
+data/example_courses.json – Optional test data:  
+JSON output for prototyping  
+Sample courses for testing mapping & optimization modules  
+  
+Folder Diagram Flow  
++ gold/  
+  |  
+  +-- crawler.py      -> Scrapes courses (JSON output)  
+  +-- degree_parser.py-> Loads degrees (JSON output)  
+  +-- mapping.py      -> Matches courses to degrees  
+  +-- optimizer.py    -> Calculates optimized paths  
+  +-- ui.py           -> Provides interface for user interaction  
+  +-- config.json     -> Holds settings and constraints  
+  +-- static/         -> CSS & JS for web UI  
+  +-- data/           -> Example course and degree data  
+  +-- README.md       -> Documentation, architecture, instructions  
+  
+Tech Stack
+Python 3.11+
+Requests + BeautifulSoup → Web scraping
+Pandas / NumPy → Data processing
+JSON / SQLite → Storage & caching
+Flask or FastAPI → Web dashboard
+Optional: Google Translate API for foreign universities
+Next Steps (Stage 1)
+Prototype crawler (start with Coursera or ACE).
+Build sample degree JSON.
+Map courses → degree requirements.
+Simple optimizer: rank by transferable credits.
+UI prototype: CLI or minimal Flask app.
+Test locally with example_courses.json.
+Expand crawler to multiple sources (international + MOOCs).

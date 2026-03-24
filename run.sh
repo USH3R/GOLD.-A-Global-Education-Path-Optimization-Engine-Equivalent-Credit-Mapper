@@ -1,37 +1,49 @@
 #!/bin/bash
 
-# -------------------------------
-# Gold Application Launcher Script
-# -------------------------------
-# This script sets up the environment and runs the Gold app
-# in development mode. It is compatible with GitHub Codespaces,
-# Linux, and macOS terminals.
-# -------------------------------
+# -----------------------------
+# Gold App Launcher - run.sh
+# Fully automated for Codespaces / Linux
+# -----------------------------
 
-# Step 1: Set environment variables
-export FLASK_APP=app.py         # Main Flask file
-export FLASK_ENV=development    # Enables debug/reload mode
-
-# Step 2: Set default host and port
-HOST=0.0.0.0
-PORT=5000
-
-# Step 3: Print startup message
+# Repo root assumed
 echo "-------------------------------------------"
 echo "Starting Gold app..."
-echo "Access the app at: http://localhost:$PORT"
 echo "-------------------------------------------"
 
-# Step 4: Start Flask server in background
-# & allows you to run optional browser open commands afterward
-flask run --host=$HOST --port=$PORT &
+# --- Step 1: Check for Python 3 ---
+if ! command -v python3 &> /dev/null
+then
+    echo "Python3 not found. Install Python3 to continue."
+    exit 1
+fi
 
-# Capture the Flask process ID so we can manage it if needed
-FLASK_PID=$!
+# --- Step 2: Create virtual environment if missing ---
+if [ ! -d "venv" ]; then
+    echo "Creating Python virtual environment..."
+    python3 -m venv venv
+fi
 
-# Step 5 (Optional): Attempt to open browser automatically
-# Works for Linux and macOS. Silently fails if not available.
-xdg-open http://localhost:$PORT 2>/dev/null || open http://localhost:$PORT 2>/dev/null || echo "Open the URL manually in your browser."
+# --- Step 3: Activate virtual environment ---
+source venv/bin/activate
 
-# Step 6: Wait for Flask process
-wait $FLASK_PID
+# --- Step 4: Install required packages ---
+echo "Installing dependencies..."
+pip install --upgrade pip
+pip install flask requests beautifulsoup4 pandas
+
+# --- Step 5: Run Flask app ---
+export FLASK_APP=app.py
+export FLASK_ENV=development
+
+# Attempt to open browser automatically
+URL="http://localhost:5000"
+if command -v xdg-open &> /dev/null; then
+    xdg-open $URL
+elif command -v gnome-open &> /dev/null; then
+    gnome-open $URL
+else
+    echo "Could not automatically open browser."
+fi
+
+# Run the Flask app
+flask run --host=0.0.0.0 --port=5000

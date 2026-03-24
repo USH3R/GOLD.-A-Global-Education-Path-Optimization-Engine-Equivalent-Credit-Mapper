@@ -1,5 +1,46 @@
 {
   "Bachelor of Computer Science": {
+    "name": "Bachelor of Computer Science",
+    "transferable_credits": 12,
+    "courses": [
+      {"name": "Intro to Programming", "credits": 3},
+      {"name": "Data Structures", "credits": 3},
+      {"name": "Algorithms", "credits": 3},
+      {"name": "Databases", "credits": 3},
+      {"name": "Operating Systems", "credits": 3},
+      {"name": "Networks", "credits": 3},
+      {"name": "Software Engineering", "credits": 3},
+      {"name": "Capstone Project", "credits": 3}
+    ]
+  },
+  "Bachelor of Business Administration": {
+    "name": "Bachelor of Business Administration",
+    "transferable_credits": 15,
+    "courses": [
+      {"name": "Intro to Business", "credits": 3},
+      {"name": "Accounting", "credits": 3},
+      {"name": "Finance", "credits": 3},
+      {"name": "Marketing", "credits": 3},
+      {"name": "Management", "credits": 3},
+      {"name": "Business Law", "credits": 3},
+      {"name": "Capstone Project", "credits": 3}
+    ]
+  },
+  "Bachelor of Psychology": {
+    "name": "Bachelor of Psychology",
+    "transferable_credits": 10,
+    "courses": [
+      {"name": "Intro to Psychology", "credits": 3},
+      {"name": "Biopsychology", "credits": 3},
+      {"name": "Cognitive Psychology", "credits": 3},
+      {"name": "Developmental Psychology", "credits": 3},
+      {"name": "Social Psychology", "credits": 3},
+      {"name": "Research Methods", "credits": 3},
+      {"name": "Capstone Project", "credits": 3}
+    ]
+  }
+}{
+  "Bachelor of Computer Science": {
     "courses": [
       {"code": "CS101", "name": "Introduction to Programming", "credits": 3, "description": "Learn programming basics using Python."},
       {"code": "CS102", "name": "Data Structures", "credits": 3, "description": "Fundamental data structures for computing."},

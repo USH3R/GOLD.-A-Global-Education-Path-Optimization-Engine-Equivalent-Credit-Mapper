@@ -1,49 +1,45 @@
 #!/bin/bash
 
-# -----------------------------
-# Gold App Launcher - run.sh
-# Fully automated for Codespaces / Linux
-# -----------------------------
+# -------------------------------------------
+# Gold App: Run Script for GitHub Codespaces
+# -------------------------------------------
 
-# Repo root assumed
 echo "-------------------------------------------"
 echo "Starting Gold app..."
 echo "-------------------------------------------"
 
-# --- Step 1: Check for Python 3 ---
-if ! command -v python3 &> /dev/null
-then
-    echo "Python3 not found. Install Python3 to continue."
-    exit 1
-fi
-
-# --- Step 2: Create virtual environment if missing ---
+# Create virtual environment if it doesn't exist
 if [ ! -d "venv" ]; then
     echo "Creating Python virtual environment..."
     python3 -m venv venv
 fi
 
-# --- Step 3: Activate virtual environment ---
+# Activate virtual environment
 source venv/bin/activate
 
-# --- Step 4: Install required packages ---
-echo "Installing dependencies..."
+# Upgrade pip
+echo "Upgrading pip..."
 pip install --upgrade pip
+
+# Install dependencies
+echo "Installing required packages..."
 pip install flask requests beautifulsoup4 pandas
 
-# --- Step 5: Run Flask app ---
-export FLASK_APP=app.py
-export FLASK_ENV=development
-
-# Attempt to open browser automatically
-URL="http://localhost:5000"
-if command -v xdg-open &> /dev/null; then
-    xdg-open $URL
-elif command -v gnome-open &> /dev/null; then
-    gnome-open $URL
-else
-    echo "Could not automatically open browser."
+# Ensure Flask app is found
+if [ ! -f "app.py" ]; then
+    echo "Error: app.py not found in repo root!"
+    exit 1
 fi
 
-# Run the Flask app
-flask run --host=0.0.0.0 --port=5000
+# Inform user how to access app
+echo "-------------------------------------------"
+echo "Access the app in your browser:"
+echo "http://localhost:5000"
+echo "Use the Codespaces 'Ports' panel to open in a new tab."
+echo "-------------------------------------------"
+
+# Run Flask app
+export FLASK_APP=app.py
+export FLASK_RUN_HOST=0.0.0.0
+export FLASK_RUN_PORT=5000
+flask run

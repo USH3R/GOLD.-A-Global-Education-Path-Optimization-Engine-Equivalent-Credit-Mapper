@@ -1,4 +1,35 @@
-def load_degree():
+def load_degree(user_input):
+    """
+    Build a degree dynamically based on user input
+    """
+
+    name = user_input.lower()
+
+    # Dynamic keyword generation
+    if "business" in name:
+        keywords = ["business", "management", "finance", "marketing", "accounting", "operations", "economics"]
+
+    elif "cyber" in name or "security" in name:
+        keywords = ["cybersecurity", "security", "network", "hacking", "encryption", "it", "systems"]
+
+    elif "computer" in name:
+        keywords = ["computer", "programming", "software", "algorithms", "data"]
+
+    else:
+        # fallback generic keywords
+        keywords = name.split()
+
+    return {
+        "name": user_input,
+        "keywords": keywords
+    }
+
+
+def normalize_degree(degree):
+    return {
+        "name": degree.get("name", "Unknown"),
+        "keywords": [k.lower() for k in degree.get("keywords", [])]
+    }def load_degree():
     return {
         "name": "Business Administration",
         "keywords": [

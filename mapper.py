@@ -15,7 +15,7 @@ def map_courses_to_degree(degree_name):
         "degree": degree_name,
         "courses_needed": courses,
         "total_credits": total_credits
-    }from degree_parser import load_degree
+    from degree_parser import load_degree
 
 def map_courses_to_degree(degree_name):
     """Return all courses for the requested degree."""

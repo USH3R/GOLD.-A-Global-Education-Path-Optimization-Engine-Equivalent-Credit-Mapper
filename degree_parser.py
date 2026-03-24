@@ -1,19 +1,22 @@
-import json
-
-def load_degree():
-    # Simple example degree requirements
+# degree_parser.py
+def load_degree(degree_name="business administration"):
+    """
+    Load degree requirements for the specified degree.
+    Currently returns stub data; later can load real catalog info.
+    """
+    # Replace this stub with actual degree parsing from a catalog later
     return {
-        "degree_name": "Business Administration",
+        "degree_name": degree_name,
         "total_credits": 120,
         "requirements": [
-            {"category": "Core", "credits": 60, "courses": ["Intro to Business", "Management 101", "Accounting Basics"]},
-            {"category": "Elective", "credits": 60, "courses": ["Cybersecurity Basics", "Advanced Algorithms", "Project Management"]}
+            {"category": "Core", "credits": 60, "courses": ["Intro to Business", "Accounting 101", "Management 101"]},
+            {"category": "Elective", "credits": 60, "courses": ["Marketing Basics", "Finance Fundamentals"]}
         ]
     }
 
 def normalize_degree(degree_data):
-    # Convert course names to lowercase for easier matching
-    degree_data["requirements"] = [
-        {**req, "courses": [c.lower() for c in req["courses"]]} for req in degree_data["requirements"]
-    ]
+    """
+    Normalize course names and requirements.
+    """
+    # For now, just pass through
     return degree_data

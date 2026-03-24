@@ -1,43 +1,42 @@
-# mapper.py
+import json
 from degree_parser import load_degree
 
 def map_courses_to_degree(courses_taken, degree_name):
     """
-    Map the courses a student has taken to the target degree.
-    
-    Parameters:
-    - courses_taken: list of course names the student has completed
-    - degree_name: string of the target degree
-    
-    Returns:
-    A dictionary with:
-    - degree
-    - courses_needed
-    - total_credits
-    - transferable_credits
-    - error (if any)
+    Maps a student's taken courses to the target degree.
+    Returns courses needed, total credits, and transferable credits.
     """
     # Load full degree info
-    degree = load_degree(degree_name)
+    degree_data = load_degree(degree_name)
 
-    if "error" in degree:
+    # If degree not found, return error
+    if "error" in degree_data:
         return {
             "degree": degree_name,
             "courses_needed": [],
             "total_credits": 0,
             "transferable_credits": 0,
-            "error": degree["error"]
+            "error": degree_data["error"]
         }
 
-    # Determine which courses are still needed
-    courses_needed = [c for c in degree.get("courses", []) if c not in courses_taken]
+    all_courses = degree_data.get("courses", [])
+    total_credits = sum(course.get("credits", 0) for course in all_courses)
 
-    # Mock transferable credits: count of courses already taken
-    transferable_credits = len([c for c in courses_taken if c in degree.get("courses", [])])
+    # Determine which courses the student still needs
+    courses_needed = [
+        course for course in all_courses if course["name"] not in courses_taken
+    ]
+
+    # Simulate transferable credits (for now, just count taken courses that match degree courses)
+    transferable_credits = sum(
+        course["credits"]
+        for course in all_courses
+        if course["name"] in courses_taken
+    )
 
     return {
         "degree": degree_name,
         "courses_needed": courses_needed,
-        "total_credits": len(degree.get("courses", [])),
+        "total_credits": total_credits,
         "transferable_credits": transferable_credits
     }

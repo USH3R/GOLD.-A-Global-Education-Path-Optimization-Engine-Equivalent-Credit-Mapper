@@ -1,6 +1,55 @@
 # app.py
 from flask import Flask, render_template, request, jsonify
 from crawler import crawl_all
+from degreeparser import load_degree, normalize_degree
+from mapper import map_courses_to_degree
+from optimizer import optimize_path
+import traceback
+
+app = Flask(__name__)
+
+@app.route("/")
+def index():
+    # Renders the main page with form
+    return render_template("index.html")
+
+@app.route("/optimize", methods=["POST"])
+def optimize():
+    try:
+        # Get the degree typed by the user
+        target_degree = request.form.get("degree")
+        if not target_degree:
+            return jsonify({"error": "No degree provided"}), 400
+
+        # Load and normalize degree requirements
+        degree_data = normalize_degree(load_degree(target_degree))
+
+        # Crawl all course sources (MOOCs, ACE, CLEP, etc.)
+        courses = crawl_all()
+
+        # Map available courses to degree requirements
+        mapped = map_courses_to_degree(courses, degree_data)
+
+        # Run optimization to select best path
+        optimized = optimize_path(mapped)
+
+        # Return JSON
+        return jsonify(optimized)
+
+    except Exception as e:
+        # Print traceback in terminal for debugging
+        print(traceback.format_exc())
+        # Return error as JSON
+        return jsonify({
+            "error": "An internal server error occurred.",
+            "details": str(e)
+        }), 500
+
+if __name__ == "__main__":
+    # Run app on all addresses to allow Codespaces access
+    app.run(host="0.0.0.0", port=5000, debug=True)# app.py
+from flask import Flask, render_template, request, jsonify
+from crawler import crawl_all
 from degree_parser import load_degree, normalize_degree
 from mapper import map_courses_to_degree
 from optimizer import optimize_path

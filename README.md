@@ -102,7 +102,6 @@ Optional: Google Translate API for foreign universities
     7. Expand crawler to multiple sources (international + MOOCs).  
 
 🏃‍♂️ Run the SHOCKACON Demo
-
     Run in GitHub Codespaces (Recommended)
     Open this repository on GitHub.
     Click Code → Codespaces → Create Codespace on main.

@@ -59,7 +59,9 @@ def calculate_degree_stats(courses_needed, degree_info):
         "total_cost": num_courses * degree_info.get("cost", 0),
         "transferable_credits": num_courses * degree_info.get("transferable_credits", 0)
     }
-    return statsdef map_courses_to_degree(courses, degree):
+    return stats
+    
+    def map_courses_to_degree(courses, degree):
     mapped = []
     transferable_credits = 0
 

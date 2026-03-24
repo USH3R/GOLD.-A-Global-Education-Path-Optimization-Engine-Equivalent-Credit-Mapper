@@ -10,11 +10,12 @@
         <h1>Gold: Education Path Optimizer</h1>
         <form id="degreeForm">
             <label for="degree">Enter your target degree:</label>
-            <input type="text" id="degree" name="degree" placeholder="e.g., Master of Business Administration" required>
+            <input type="text" id="degree" name="degree" required>
             <button type="submit">Optimize</button>
         </form>
-        <div id="results">
-            <!-- JSON results will be displayed here -->
+        <div id="result">
+            <h2>Optimization Result:</h2>
+            <pre id="jsonOutput">Enter a degree and click "Optimize" to see results.</pre>
         </div>
     </div>
     <script src="{{ url_for('static', filename='script.js') }}"></script>

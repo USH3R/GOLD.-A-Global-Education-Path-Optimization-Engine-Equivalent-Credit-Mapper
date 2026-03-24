@@ -1,4 +1,4 @@
-Nine Files / Structure  
+**Nine Files / Structure**  
 gold/  
 │  
 ├── README.md                 # Architecture, workflow, tech stack, modules, example data  
@@ -14,7 +14,7 @@ gold/
 └── data/  
     └── example_courses.json  # Sample JSON output from crawler for testing  
   
-File Purposes  
+**File Purposes**  
     1. README.md – Provides overview:  
       - Project title & description  
       - Architecture diagram (modules & data flow)  
@@ -56,7 +56,7 @@ File Purposes
       - JSON output for prototyping  
       - Sample courses for testing mapping & optimization modules  
     
-**Folder Diagram Flow**
+**Folder Diagram Flow**  
 + gold/  
   |  
   +-- crawler.py      -> Scrapes courses (JSON output)  
@@ -69,7 +69,7 @@ File Purposes
   +-- data/           -> Example course and degree data  
   +-- README.md       -> Documentation, architecture, instructions  
   
-#Tech Stack  
+**Tech Stack**  
 Python 3.11+  
 Requests + BeautifulSoup → Web scraping  
 Pandas / NumPy → Data processing  
@@ -77,7 +77,7 @@ JSON / SQLite → Storage & caching
 Flask or FastAPI → Web dashboard  
 Optional: Google Translate API for foreign universities  
   
-Next Steps (Stage 1)  
+**Next Steps (Stage 1)**  
 Prototype crawler (start with Coursera or ACE).  
 Build sample degree JSON.  
 Map courses → degree requirements.  

@@ -69,18 +69,19 @@ Folder Diagram Flow
   +-- data/           -> Example course and degree data  
   +-- README.md       -> Documentation, architecture, instructions  
   
-#Tech Stack
-Python 3.11+
-Requests + BeautifulSoup → Web scraping
-Pandas / NumPy → Data processing
-JSON / SQLite → Storage & caching
-Flask or FastAPI → Web dashboard
-Optional: Google Translate API for foreign universities
-Next Steps (Stage 1)
-Prototype crawler (start with Coursera or ACE).
-Build sample degree JSON.
-Map courses → degree requirements.
-Simple optimizer: rank by transferable credits.
-UI prototype: CLI or minimal Flask app.
-Test locally with example_courses.json.
-Expand crawler to multiple sources (international + MOOCs).
+#Tech Stack  
+Python 3.11+  
+Requests + BeautifulSoup → Web scraping  
+Pandas / NumPy → Data processing  
+JSON / SQLite → Storage & caching  
+Flask or FastAPI → Web dashboard  
+Optional: Google Translate API for foreign universities  
+  
+Next Steps (Stage 1)  
+Prototype crawler (start with Coursera or ACE).  
+Build sample degree JSON.  
+Map courses → degree requirements.  
+Simple optimizer: rank by transferable credits.  
+UI prototype: CLI or minimal Flask app.  
+Test locally with example_courses.json.  
+Expand crawler to multiple sources (international + MOOCs).  

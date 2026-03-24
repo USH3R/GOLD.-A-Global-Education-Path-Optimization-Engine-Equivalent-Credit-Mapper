@@ -1,4 +1,38 @@
-# degreeparser.py
+from flask import Flask, render_template, request, jsonify
+from crawler import crawl_all
+from degreeparser import load_degree, normalize_degree
+from mapper import map_courses_to_degree
+from optimizer import optimize_path
+
+app = Flask(__name__)
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+@app.route("/optimize", methods=["POST"])
+def optimize():
+    try:
+        target_degree = request.form.get("degree", "").strip()
+        normalized_degree = normalize_degree(load_degree(target_degree))
+        courses = crawl_all()
+        mapped = map_courses_to_degree(courses, normalized_degree)
+        optimized = optimize_path(mapped)
+        return jsonify(optimized)
+    except Exception as e:
+        # Always return something JSON-safe if something goes wrong
+        return jsonify({
+            "degree": target_degree if 'target_degree' in locals() else "Unknown",
+            "courses_needed": [],
+            "total_cost": 0,
+            "total_duration_weeks": 0,
+            "transferable_credits": 0,
+            "error": str(e)
+        })
+
+if __name__ == "__main__":
+    # Run in debug mode on all interfaces so Codespaces can open it
+    app.run(debug=True, host="0.0.0.0", port=5000)# degreeparser.py
 
 def load_degree(degree_name=None):
     """

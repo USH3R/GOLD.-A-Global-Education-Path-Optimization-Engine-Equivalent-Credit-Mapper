@@ -1,7 +1,6 @@
-# app.py
 from flask import Flask, render_template, request, jsonify
 from crawler import crawl_all
-from degree_parser import load_degree, normalize_degree
+from degreeparser import load_degree, normalize_degree
 from mapper import map_courses_to_degree
 from optimizer import optimize_path
 import traceback
@@ -10,81 +9,45 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    # Renders the main page with form
     return render_template("index.html")
 
 @app.route("/optimize", methods=["POST"])
 def optimize():
+    target_degree = request.form.get("degree", "").strip()
+    
     try:
-        # Get the degree typed by the user
-        target_degree = request.form.get("degree")
-        if not target_degree:
-            return jsonify({"error": "No degree provided"}), 400
-
-        # Load and normalize degree requirements
-        degree_data = normalize_degree(load_degree(target_degree))
-
-        # Crawl all course sources (MOOCs, ACE, CLEP, etc.)
+        # Load and normalize degree
+        degree = normalize_degree(load_degree())
+        
+        # Crawl courses from sources
         courses = crawl_all()
-
-        # Map available courses to degree requirements
-        mapped = map_courses_to_degree(courses, degree_data)
-
-        # Run optimization to select best path
-        optimized = optimize_path(mapped)
-
-        # Return JSON
-        return jsonify(optimized)
-
-    except Exception as e:
-        # Print traceback in terminal for debugging
-        print(traceback.format_exc())
-        # Return error as JSON
-        return jsonify({
-            "error": "An internal server error occurred.",
-            "details": str(e)
-        }), 500
-
-if __name__ == "__main__":
-    # Run app on all addresses to allow Codespaces access
-    app.run(host="0.0.0.0", port=5000, debug=True)# app.py
-from flask import Flask, render_template, request, jsonify
-from crawler import crawl_all
-from degree_parser import load_degree, normalize_degree
-from mapper import map_courses_to_degree
-from optimizer import optimize_path
-
-app = Flask(__name__)
-
-@app.route("/")
-def index():
-    return render_template("index.html")
-
-@app.route("/optimize", methods=["POST"])
-def optimize():
-    try:
-        # Get target degree from form
-        target_degree = request.form.get("degree", "").strip()
-        if not target_degree:
-            return jsonify({"error": "No degree provided"}), 400
-
-        # Load and normalize degree requirements
-        degree_data = normalize_degree(load_degree(target_degree))
-
-        # Crawl courses from MOOCs, ACE, CLEP, etc.
-        courses = crawl_all(subject=target_degree)
-
+        
         # Map courses to degree requirements
-        mapped_courses = map_courses_to_degree(courses, degree_data)
-
-        # Run optimization engine
+        mapped_courses = map_courses_to_degree(courses, degree)
+        
+        # Optimize the course path
         optimized_result = optimize_path(mapped_courses)
-
+        
+        # Return the optimized JSON
         return jsonify(optimized_result)
-
+    
     except Exception as e:
-        return jsonify({"error": "An unexpected error occurred", "details": str(e)}), 500
+        # Print full traceback to Codespaces terminal
+        print("=== ERROR IN /optimize ===")
+        print(traceback.format_exc())
+        print("==========================")
+        
+        # Return a safe fallback JSON to the browser
+        fallback_response = {
+            "degree": target_degree if target_degree else "Unknown Degree",
+            "total_cost": 0,
+            "total_duration_weeks": 0,
+            "courses_needed": ["Sample Course 1", "Sample Course 2"],
+            "transferable_credits": 0,
+            "error": "An unexpected error occurred. Check server logs."
+        }
+        return jsonify(fallback_response)
 
 if __name__ == "__main__":
-    # Flask dev server
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    # Debug mode on and host set for Codespaces
+    app.run(debug=True, host="0.0.0.0", port=5000)

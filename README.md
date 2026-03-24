@@ -78,10 +78,10 @@ Flask or FastAPI → Web dashboard
 Optional: Google Translate API for foreign universities  
   
 **Next Steps (Stage 1)**  
-Prototype crawler (start with Coursera or ACE).  
-Build sample degree JSON.  
-Map courses → degree requirements.  
-Simple optimizer: rank by transferable credits.  
-UI prototype: CLI or minimal Flask app.  
-Test locally with example_courses.json.  
-Expand crawler to multiple sources (international + MOOCs).  
+    1.Prototype crawler (start with Coursera or ACE).  
+    2.Build sample degree JSON.  
+    3.Map courses → degree requirements.  
+    4.Simple optimizer: rank by transferable credits.  
+    5.UI prototype: CLI or minimal Flask app.  
+    6.Test locally with example_courses.json.  
+    7.Expand crawler to multiple sources (international + MOOCs).  

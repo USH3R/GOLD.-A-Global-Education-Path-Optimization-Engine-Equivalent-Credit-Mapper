@@ -1,7 +1,7 @@
 # app.py
 from flask import Flask, render_template, request, jsonify
 from crawler import crawl_all
-from degreeparser import load_degree, normalize_degree
+from degree_parser import load_degree, normalize_degree
 from mapper import map_courses_to_degree
 from optimizer import optimize_path
 import traceback

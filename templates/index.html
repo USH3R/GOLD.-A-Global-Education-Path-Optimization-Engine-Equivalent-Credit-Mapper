@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Gold - Education Path Optimizer</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <h1>Gold Education Path Optimization Engine</h1>
-    <form id="degreeForm">
-        <label for="degree">Enter Target Degree:</label>
-        <input type="text" id="degree" name="degree">
+
+    <form id="degree-form">
+        <label for="degree">Enter your target degree:</label>
+        <input type="text" id="degree" name="degree" placeholder="e.g., MBA">
         <button type="submit">Optimize</button>
     </form>
 
-    <div id="results"></div>
+    <pre id="output"></pre>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>

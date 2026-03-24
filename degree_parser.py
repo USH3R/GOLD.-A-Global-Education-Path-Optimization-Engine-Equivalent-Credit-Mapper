@@ -1,189 +1,53 @@
+import json
 import difflib
+from typing import Optional, Dict, Any
 
-# Normalize strings: lowercase and strip spaces
+# Load degrees from JSON database
+DEGREES_DB_FILE = "degrees.json"
+
+def load_degrees() -> Dict[str, Any]:
+    """Load degree definitions from the JSON database."""
+    try:
+        with open(DEGREES_DB_FILE, "r", encoding="utf-8") as f:
+            degrees = json.load(f)
+        return degrees
+    except FileNotFoundError:
+        print(f"Error: {DEGREES_DB_FILE} not found.")
+        return {}
+    except json.JSONDecodeError:
+        print(f"Error: {DEGREES_DB_FILE} contains invalid JSON.")
+        return {}
+
+# Normalize strings for matching
 def normalize_degree(name: str) -> str:
+    """Lowercase and strip whitespace for consistent matching."""
     return name.strip().lower()
 
-# Find degree in database
-def find_degree(degree_name: str, degrees: dict):
-    normalized_name = normalize_degree(degree_name)
-    # Try exact match
-    for key in degrees:
-        if normalize_degree(key) == normalized_name:
-            return degrees[key]
-    # Try close match
-    matches = difflib.get_close_matches(normalized_name, [k.lower() for k in degrees.keys()])
+# Find a degree by name with normalization and fuzzy matching
+def find_degree(degree_name: str, degrees: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    """Return the degree dictionary matching the input name."""
+    normalized_input = normalize_degree(degree_name)
+
+    # Try exact normalized match first
+    for key, value in degrees.items():
+        if normalize_degree(key) == normalized_input:
+            return value
+
+    # Fuzzy match if exact match fails
+    degree_keys = list(degrees.keys())
+    degree_keys_normalized = [normalize_degree(k) for k in degree_keys]
+    matches = difflib.get_close_matches(normalized_input, degree_keys_normalized, n=1, cutoff=0.6)
     if matches:
-        return degrees[matches[0]]
-    return None# degree_parser.py
-# Handles loading and normalizing degree data
+        match_index = degree_keys_normalized.index(matches[0])
+        return degrees[degree_keys[match_index]]
 
-# Sample degree database
-DEGREES = {
-    "business administration": {
-        "courses": [
-            "Business Management Basics",
-            "Operations Management",
-            "Introduction to Finance",
-            "Marketing Fundamentals",
-            "Principles of Accounting",
-            "Microeconomics"
-        ],
-        "transferable_credits": 3,
-        "duration_weeks": 4,
-        "cost": 0
-    },
-    "cybersecurity": {
-        "courses": [
-            "Introduction to Cybersecurity",
-            "Network Security Fundamentals",
-            "Operating Systems & Security",
-            "Ethical Hacking Basics",
-            "Cybersecurity Policy & Governance"
-        ],
-        "transferable_credits": 3,
-        "duration_weeks": 4,
-        "cost": 0
-    }
-    # Add more degrees here as needed
-}
+    return None
 
-
-def normalize_degree(degree_name: str) -> str:
-    """
-    Normalize a user-provided degree string to match database keys.
-    Lowercase and strip whitespace.
-    """
-    return degree_name.strip().lower()
-
-
-def load_degree(degree_name: str) -> dict:
-    """
-    Return the degree info for a normalized degree name.
-    If not found, raise a KeyError.
-    """
-    normalized = normalize_degree(degree_name)
-    if normalized in DEGREES:
-        return DEGREES[normalized]
-    else:
-        raise KeyError(f"Degree '{degree_name}' not found in database.")def load_degree(user_input):
-    """
-    Build a degree dynamically based on user input
-    """
-
-    name = user_input.lower()
-
-    # Dynamic keyword generation
-    if "business" in name:
-        keywords = ["business", "management", "finance", "marketing", "accounting", "operations", "economics"]
-
-    elif "cyber" in name or "security" in name:
-        keywords = ["cybersecurity", "security", "network", "hacking", "encryption", "it", "systems"]
-
-    elif "computer" in name:
-        keywords = ["computer", "programming", "software", "algorithms", "data"]
-
-    else:
-        # fallback generic keywords
-        keywords = name.split()
-
-    return {
-        "name": user_input,
-        "keywords": keywords
-    }
-
-
-def normalize_degree(degree):
-    return {
-        "name": degree.get("name", "Unknown"),
-        "keywords": [k.lower() for k in degree.get("keywords", [])]
-    }def load_degree():
-    return {
-        "name": "Business Administration",
-        "keywords": [
-            "business",
-            "management",
-            "finance",
-            "marketing",
-            "accounting",
-            "operations",
-            "economics"
-        ]
-    }
-
-
-def normalize_degree(degree):
-    # DO NOT strip keywords — just pass through clean
-    return {
-        "name": degree.get("name", "Unknown"),
-        "keywords": degree.get("keywords", [])
-    }def load_degree():
-    """
-    Returns a basic degree structure.
-    This is a placeholder until we plug in real university data.
-    """
-    return {
-        "name": "Business Administration",
-        "keywords": [
-            "business",
-            "management",
-            "finance",
-            "marketing",
-            "accounting",
-            "operations",
-            "economics"
-        ]
-    }
-
-
-def normalize_degree(degree):
-    """
-    Ensures consistent structure for downstream modules.
-    """
-    if not degree:
-        return {"name": "Unknown", "keywords": []}
-
-    name = degree.get("name", "Unknown")
-    keywords = degree.get("keywords", [])
-
-    # Normalize everything to lowercase
-    keywords = [k.lower() for k in keywords]
-
-    return {
-        "name": name,
-        "keywords": keywords
-    }# degreeparser.py
-
-# Placeholder database of degrees (could later scrape universities)
-DEGREE_DB = {
-    "business administration": {
-        "degree_name": "Business Administration",
-        "requirements": [
-            {"category": "Core", "credits": 60, "courses": ["Intro to Business", "Accounting 101", "Management 101"]},
-            {"category": "Elective", "credits": 60, "courses": ["Marketing Basics", "Economics Basics"]}
-        ]
-    },
-    "mba": {
-        "degree_name": "MBA",
-        "requirements": [
-            {"category": "Core", "credits": 60, "courses": ["Finance", "Leadership", "Strategy"]},
-            {"category": "Elective", "credits": 60, "courses": ["Entrepreneurship", "Global Business"]}
-        ]
-    }
-}
-
-def load_degree(degree_name="business administration"):
-    # Return degree dict, defaulting to business admin
-    return DEGREE_DB.get(degree_name.lower(), DEGREE_DB["business administration"])
-
-def normalize_degree(degree):
-    # Just return as-is for now; could standardize course names
-    return {
-        "degree_name": degree["degree_name"],
-        "requirements": degree["requirements"]
-    }
-
-if __name__ == "__main__":
-    import json
-    d = normalize_degree(load_degree("MBA"))
-    print(json.dumps(d, indent=4))
+# Public API function
+def load_degree(degree_name: str) -> Dict[str, Any]:
+    """Load a degree by name; returns None if not found."""
+    degrees = load_degrees()
+    degree = find_degree(degree_name, degrees)
+    if degree is None:
+        return {"error": f"Degree '{degree_name}' not found in database."}
+    return degree

@@ -101,21 +101,22 @@ Optional: Google Translate API for foreign universities
     6. Test locally with example_courses.json.  
     7. Expand crawler to multiple sources (international + MOOCs).  
 
-🏃‍♂️ Run the SHOCKACON Demo
-    Run in GitHub Codespaces (Recommended)
-    Open this repository on GitHub.
-    Click Code → Codespaces → Create Codespace on main.
-    Wait for the environment to load.
-    Open the terminal inside Codespaces.
-    Run: bash run.sh
+🏃‍♂️ Run the SHOCKACON Demo  
 
-    Run Manually Inside the Repository (Local Machine)
-    If you downloaded or cloned the repository:
-    Open a terminal.
-    Navigate to the project folder.
-    Example: cd GOLD.-A-Global-Education-Path-Optimization-Engine-Equivalent-Credit-Mapper
-    Run the launcher: bash run.sh
-
+    Run in GitHub Codespaces (Recommended)  
+    Open this repository on GitHub.  
+    Click Code → Codespaces → Create Codespace on main.  
+    Wait for the environment to load.  
+    Open the terminal inside Codespaces.  
+    Run: bash run.sh  
+  
+    Run Manually Inside the Repository (Local Machine)  
+    If you downloaded or cloned the repository:  
+    Open a terminal.  
+    Navigate to the project folder.  
+    Example: cd GOLD.-A-Global-Education-Path-Optimization-Engine-Equivalent-Credit-Mapper  
+    Run the launcher: bash run.sh  
+  
     If You Are Using a Random Public Terminal
     Public terminals do not automatically have this project. You must first download or clone the repository.
     A. Option A — Clone with Git

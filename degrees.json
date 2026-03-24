@@ -1,5 +1,69 @@
 {
   "Bachelor of Computer Science": {
+    "courses": [
+      "Introduction to Programming",
+      "Data Structures",
+      "Algorithms",
+      "Computer Architecture",
+      "Operating Systems",
+      "Databases",
+      "Software Engineering",
+      "Computer Networks",
+      "Artificial Intelligence",
+      "Machine Learning",
+      "Web Development",
+      "Mobile App Development",
+      "Cybersecurity Fundamentals",
+      "Human-Computer Interaction",
+      "Elective 1",
+      "Elective 2",
+      "Elective 3"
+    ]
+  },
+  "Bachelor of Business Administration": {
+    "courses": [
+      "Introduction to Business",
+      "Financial Accounting",
+      "Managerial Accounting",
+      "Marketing Principles",
+      "Business Law",
+      "Organizational Behavior",
+      "Human Resource Management",
+      "Operations Management",
+      "Corporate Finance",
+      "Strategic Management",
+      "Business Ethics",
+      "Entrepreneurship",
+      "International Business",
+      "Economics",
+      "Elective 1",
+      "Elective 2",
+      "Elective 3"
+    ]
+  },
+  "Bachelor of Psychology": {
+    "courses": [
+      "Introduction to Psychology",
+      "Biopsychology",
+      "Developmental Psychology",
+      "Cognitive Psychology",
+      "Social Psychology",
+      "Abnormal Psychology",
+      "Clinical Psychology",
+      "Psychological Testing",
+      "Personality Theories",
+      "Research Methods in Psychology",
+      "Statistics for Psychology",
+      "Psychology of Learning",
+      "Health Psychology",
+      "Neuropsychology",
+      "Elective 1",
+      "Elective 2",
+      "Elective 3"
+    ]
+  }
+}{
+  "Bachelor of Computer Science": {
     "courses_needed": [
       "Introduction to Computer Science",
       "Programming I",

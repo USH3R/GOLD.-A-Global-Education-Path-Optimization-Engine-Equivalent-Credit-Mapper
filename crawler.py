@@ -25,7 +25,7 @@ def crawl_all():
         {"title": "Algorithms", "credits": 3, "cost": 80, "duration_weeks": 6},
         {"title": "Software Engineering", "credits": 3, "cost": 90, "duration_weeks": 7},
         {"title": "Database Systems", "credits": 3, "cost": 75, "duration_weeks": 5}
-    ]def crawl_all():
+    def crawl_all():
     """
     Returns a simulated set of MOOC / ACE-style courses.
     This ensures the engine produces real results immediately.

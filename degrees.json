@@ -1,100 +1,62 @@
 {
   "Bachelor of Computer Science": {
-    "name": "Bachelor of Computer Science",
-    "transferable_credits": 12,
-    "courses": [
-      {"name": "Intro to Programming", "credits": 3},
-      {"name": "Data Structures", "credits": 3},
-      {"name": "Algorithms", "credits": 3},
-      {"name": "Databases", "credits": 3},
-      {"name": "Operating Systems", "credits": 3},
-      {"name": "Networks", "credits": 3},
-      {"name": "Software Engineering", "credits": 3},
-      {"name": "Capstone Project", "credits": 3}
-    ]
+    "total_credits": 120,
+    "courses_needed": [
+      "Intro to Programming",
+      "Data Structures and Algorithms",
+      "Computer Architecture",
+      "Operating Systems",
+      "Databases",
+      "Software Engineering",
+      "Networks",
+      "Artificial Intelligence",
+      "Machine Learning",
+      "Computer Security",
+      "Elective 1",
+      "Elective 2",
+      "Elective 3",
+      "Capstone Project"
+    ],
+    "transferable_credits": 0
   },
   "Bachelor of Business Administration": {
-    "name": "Bachelor of Business Administration",
-    "transferable_credits": 15,
-    "courses": [
-      {"name": "Intro to Business", "credits": 3},
-      {"name": "Accounting", "credits": 3},
-      {"name": "Finance", "credits": 3},
-      {"name": "Marketing", "credits": 3},
-      {"name": "Management", "credits": 3},
-      {"name": "Business Law", "credits": 3},
-      {"name": "Capstone Project", "credits": 3}
-    ]
+    "total_credits": 120,
+    "courses_needed": [
+      "Principles of Management",
+      "Financial Accounting",
+      "Managerial Accounting",
+      "Business Law",
+      "Marketing Principles",
+      "Organizational Behavior",
+      "Economics",
+      "Business Ethics",
+      "Human Resource Management",
+      "Strategic Management",
+      "Elective 1",
+      "Elective 2",
+      "Elective 3",
+      "Capstone Project"
+    ],
+    "transferable_credits": 0
   },
   "Bachelor of Psychology": {
-    "name": "Bachelor of Psychology",
-    "transferable_credits": 10,
-    "courses": [
-      {"name": "Intro to Psychology", "credits": 3},
-      {"name": "Biopsychology", "credits": 3},
-      {"name": "Cognitive Psychology", "credits": 3},
-      {"name": "Developmental Psychology", "credits": 3},
-      {"name": "Social Psychology", "credits": 3},
-      {"name": "Research Methods", "credits": 3},
-      {"name": "Capstone Project", "credits": 3}
-    ]
-  }
-}{
-  "Bachelor of Computer Science": {
-    "courses": [
-      {"code": "CS101", "name": "Introduction to Programming", "credits": 3, "description": "Learn programming basics using Python."},
-      {"code": "CS102", "name": "Data Structures", "credits": 3, "description": "Fundamental data structures for computing."},
-      {"code": "CS103", "name": "Computer Organization", "credits": 3, "description": "Hardware and low-level system concepts."},
-      {"code": "CS201", "name": "Algorithms", "credits": 3, "description": "Design and analyze algorithms."},
-      {"code": "CS202", "name": "Software Engineering", "credits": 3, "description": "Software development lifecycle principles."},
-      {"code": "CS203", "name": "Databases", "credits": 3, "description": "Introduction to relational databases and SQL."},
-      {"code": "CS204", "name": "Operating Systems", "credits": 3, "description": "Core OS concepts, processes, memory, and I/O."},
-      {"code": "CS301", "name": "Artificial Intelligence", "credits": 3, "description": "AI concepts, search algorithms, and reasoning."},
-      {"code": "CS302", "name": "Machine Learning", "credits": 3, "description": "Supervised, unsupervised learning, and models."},
-      {"code": "CS303", "name": "Computer Networks", "credits": 3, "description": "Networking protocols, topologies, and security."},
-      {"code": "CS304", "name": "Web Development", "credits": 3, "description": "Front-end and back-end web technologies."},
-      {"code": "CS305", "name": "Capstone Project", "credits": 3, "description": "Team project to design a software system."},
-      {"code": "CS401", "name": "Elective 1", "credits": 3, "description": "Choose an advanced computing topic."},
-      {"code": "CS402", "name": "Elective 2", "credits": 3, "description": "Choose another specialized CS topic."},
-      {"code": "CS403", "name": "Elective 3", "credits": 3, "description": "Third elective in computing."}
-    ]
-  },
-  "Bachelor of Business Administration": {
-    "courses": [
-      {"code": "BA101", "name": "Principles of Management", "credits": 3, "description": "Foundational management concepts."},
-      {"code": "BA102", "name": "Financial Accounting", "credits": 3, "description": "Basics of financial statements and accounting."},
-      {"code": "BA103", "name": "Microeconomics", "credits": 3, "description": "Supply, demand, and market structures."},
-      {"code": "BA201", "name": "Marketing Principles", "credits": 3, "description": "Introduction to marketing strategies."},
-      {"code": "BA202", "name": "Organizational Behavior", "credits": 3, "description": "Study of people in organizations."},
-      {"code": "BA203", "name": "Business Law", "credits": 3, "description": "Legal concepts impacting businesses."},
-      {"code": "BA204", "name": "Corporate Finance", "credits": 3, "description": "Finance principles for corporations."},
-      {"code": "BA301", "name": "Human Resource Management", "credits": 3, "description": "Recruitment, performance, and HR strategy."},
-      {"code": "BA302", "name": "Operations Management", "credits": 3, "description": "Process, logistics, and efficiency strategies."},
-      {"code": "BA303", "name": "Entrepreneurship", "credits": 3, "description": "Starting and running a new business."},
-      {"code": "BA304", "name": "Strategic Management", "credits": 3, "description": "Corporate strategy and competitive analysis."},
-      {"code": "BA305", "name": "Capstone Project", "credits": 3, "description": "Business project integrating core concepts."},
-      {"code": "BA401", "name": "Elective 1", "credits": 3, "description": "Choose an advanced business topic."},
-      {"code": "BA402", "name": "Elective 2", "credits": 3, "description": "Choose another specialized topic."},
-      {"code": "BA403", "name": "Elective 3", "credits": 3, "description": "Third elective in business."}
-    ]
-  },
-  "Bachelor of Psychology": {
-    "courses": [
-      {"code": "PSY101", "name": "Introduction to Psychology", "credits": 3, "description": "Foundations of psychology."},
-      {"code": "PSY102", "name": "Developmental Psychology", "credits": 3, "description": "Study human development across lifespan."},
-      {"code": "PSY103", "name": "Social Psychology", "credits": 3, "description": "Interactions between individuals and groups."},
-      {"code": "PSY201", "name": "Cognitive Psychology", "credits": 3, "description": "Study of memory, attention, perception."},
-      {"code": "PSY202", "name": "Abnormal Psychology", "credits": 3, "description": "Study of psychological disorders."},
-      {"code": "PSY203", "name": "Biopsychology", "credits": 3, "description": "Brain, nervous system, and behavior."},
-      {"code": "PSY204", "name": "Research Methods", "credits": 3, "description": "Designing and analyzing psychological studies."},
-      {"code": "PSY301", "name": "Personality Psychology", "credits": 3, "description": "Understanding personality theories."},
-      {"code": "PSY302", "name": "Clinical Psychology", "credits": 3, "description": "Introduction to clinical assessment and therapy."},
-      {"code": "PSY303", "name": "Health Psychology", "credits": 3, "description": "Psychology of physical and mental health."},
-      {"code": "PSY304", "name": "Industrial-Organizational Psychology", "credits": 3, "description": "Psychology applied to workplace."},
-      {"code": "PSY305", "name": "Capstone Project", "credits": 3, "description": "Research or applied psychology project."},
-      {"code": "PSY401", "name": "Elective 1", "credits": 3, "description": "Choose an advanced psychology topic."},
-      {"code": "PSY402", "name": "Elective 2", "credits": 3, "description": "Second specialized elective."},
-      {"code": "PSY403", "name": "Elective 3", "credits": 3, "description": "Third elective in psychology."}
-    ]
+    "total_credits": 120,
+    "courses_needed": [
+      "Introduction to Psychology",
+      "Developmental Psychology",
+      "Cognitive Psychology",
+      "Abnormal Psychology",
+      "Social Psychology",
+      "Biopsychology",
+      "Research Methods",
+      "Statistics for Psychology",
+      "Psychological Testing",
+      "Clinical Psychology",
+      "Elective 1",
+      "Elective 2",
+      "Elective 3",
+      "Capstone Project"
+    ],
+    "transferable_credits": 0
   }
 }

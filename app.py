@@ -1,3 +1,4 @@
+# app.py
 from flask import Flask, render_template, request, jsonify
 from crawler import crawl_all
 from degree_parser import load_degree, normalize_degree
@@ -8,34 +9,33 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    # Renders the front-end form
     return render_template("index.html")
 
 @app.route("/optimize", methods=["POST"])
 def optimize():
     try:
+        # Get target degree from form
         target_degree = request.form.get("degree", "").strip()
         if not target_degree:
-            return jsonify({"error": "No degree entered"}), 400
+            return jsonify({"error": "No degree provided"}), 400
 
-        # 1️⃣ Load and normalize degree requirements
-        degree = normalize_degree(load_degree())
+        # Load and normalize degree requirements
+        degree_data = normalize_degree(load_degree(target_degree))
 
-        # 2️⃣ Crawl all available courses
-        courses = crawl_all()
+        # Crawl courses from MOOCs, ACE, CLEP, etc.
+        courses = crawl_all(subject=target_degree)
 
-        # 3️⃣ Map courses to degree requirements
-        mapped = map_courses_to_degree(courses, degree)
+        # Map courses to degree requirements
+        mapped_courses = map_courses_to_degree(courses, degree_data)
 
-        # 4️⃣ Run optimizer for best path
-        optimized = optimize_path(mapped)
+        # Run optimization engine
+        optimized_result = optimize_path(mapped_courses)
 
-        return jsonify(optimized)
+        return jsonify(optimized_result)
 
     except Exception as e:
-        # Return error in JSON if pipeline fails
-        return jsonify({"error": f"Pipeline failed: {str(e)}"}), 500
+        return jsonify({"error": "An unexpected error occurred", "details": str(e)}), 500
 
 if __name__ == "__main__":
-    # Run on all interfaces to allow Codespaces port forwarding
+    # Flask dev server
     app.run(host="0.0.0.0", port=5000, debug=True)

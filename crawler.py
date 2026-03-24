@@ -1,4 +1,10 @@
-import requests
+def crawl_all(subject="business"):
+    # Temporary stub: returns mock courses for testing
+    return [
+        {"title": "Intro to Business", "credits": 3, "source": "Coursera", "cost": 49.99, "duration_weeks": 4},
+        {"title": "Accounting 101", "credits": 3, "source": "Coursera", "cost": 49.99, "duration_weeks": 4},
+        {"title": "Marketing Basics", "credits": 3, "source": "Coursera", "cost": 49.99, "duration_weeks": 4}
+    ]import requests
 from bs4 import BeautifulSoup
 import json
 

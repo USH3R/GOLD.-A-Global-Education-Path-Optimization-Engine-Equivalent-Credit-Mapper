@@ -1,25 +1,40 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("degree-form");
-    const output = document.getElementById("output");
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("degreeForm");
+    const resultsDiv = document.getElementById("results");
 
-    form.addEventListener("submit", async (event) => {
+    form.addEventListener("submit", async function (event) {
         event.preventDefault();
 
-        const degree = document.getElementById("degree").value;
+        const degreeInput = document.getElementById("degree").value.trim();
+        if (!degreeInput) {
+            resultsDiv.innerHTML = "<p style='color:red;'>Please enter a degree.</p>";
+            return;
+        }
+
+        resultsDiv.innerHTML = "<p>Fetching optimized path...</p>";
 
         try {
+            const formData = new FormData();
+            formData.append("degree", degreeInput);
+
             const response = await fetch("/optimize", {
                 method: "POST",
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: `degree=${encodeURIComponent(degree)}`
+                body: formData
             });
 
-            if (!response.ok) throw new Error(`HTTP error ${response.status}`);
+            if (!response.ok) {
+                const errorData = await response.json();
+                resultsDiv.innerHTML = `<p style='color:red;'>Error: ${errorData.error}</p>`;
+                return;
+            }
 
             const data = await response.json();
-            output.textContent = JSON.stringify(data, null, 4);
+
+            // Pretty-print JSON results
+            resultsDiv.innerHTML = `<pre>${JSON.stringify(data, null, 4)}</pre>`;
         } catch (error) {
-            output.textContent = `Error: ${error.message}`;
+            console.error(error);
+            resultsDiv.innerHTML = "<p style='color:red;'>An unexpected error occurred. Check console.</p>";
         }
     });
 });

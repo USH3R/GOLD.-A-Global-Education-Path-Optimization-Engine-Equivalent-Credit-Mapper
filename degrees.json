@@ -1,4 +1,23 @@
 {
+  "computer_science": {
+    "name": "Bachelor of Computer Science",
+    "total_credits": 120,
+    "required_courses": ["CS101", "CS102", "MATH201", "PHYS101", "CS201", "CS301"],
+    "electives": ["ART101", "HIST200", "MUSIC105"]
+  },
+  "business_administration": {
+    "name": "Bachelor of Business Administration",
+    "total_credits": 120,
+    "required_courses": ["BUS101", "ECON101", "ACCT201", "MGMT301"],
+    "electives": ["COMM101", "PSY101"]
+  },
+  "psychology": {
+    "name": "Bachelor of Psychology",
+    "total_credits": 120,
+    "required_courses": ["PSY101", "STATS101", "BIO101", "PSY202"],
+    "electives": ["SOC101", "PHIL101"]
+  }
+}{
   "Bachelor of Computer Science": {
     "name": "Bachelor of Computer Science",
     "total_credits": 120,

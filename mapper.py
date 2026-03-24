@@ -1,4 +1,32 @@
-# mapper.py
+from degree_parser import load_degree
+
+def map_courses_to_degree(courses, degree_name):
+    """
+    Maps a list of available courses to a target degree.
+    Returns required courses, transferable credits, and missing courses.
+    """
+    degree = load_degree(degree_name)
+
+    # If degree not found
+    if "error" in degree:
+        return {
+            "degree": degree_name,
+            "error": degree["error"],
+            "courses_needed": [],
+            "transferable_credits": 0
+        }
+
+    required_courses = [c["name"] for c in degree["courses"]]
+    transferable_credits = degree.get("transferable_credits", 0)
+
+    # Determine missing courses
+    courses_needed = [c for c in required_courses if c not in courses]
+
+    return {
+        "degree": degree_name,
+        "courses_needed": courses_needed,
+        "transferable_credits": transferable_credits
+    }# mapper.py
 from degree_parser import load_degree
 
 def calculate_stats(degree_data):

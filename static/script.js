@@ -1,40 +1,26 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("degreeForm");
-    const resultsDiv = document.getElementById("results");
+    const output = document.getElementById("jsonOutput");
 
-    form.addEventListener("submit", async function (event) {
-        event.preventDefault();
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const degreeInput = document.getElementById("degree").value;
 
-        const degreeInput = document.getElementById("degree").value.trim();
-        if (!degreeInput) {
-            resultsDiv.innerHTML = "<p style='color:red;'>Please enter a degree.</p>";
-            return;
-        }
-
-        resultsDiv.innerHTML = "<p>Fetching optimized path...</p>";
+        output.textContent = "Processing...";
 
         try {
-            const formData = new FormData();
-            formData.append("degree", degreeInput);
-
             const response = await fetch("/optimize", {
                 method: "POST",
-                body: formData
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `degree=${encodeURIComponent(degreeInput)}`
             });
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                resultsDiv.innerHTML = `<p style='color:red;'>Error: ${errorData.error}</p>`;
-                return;
-            }
+            if (!response.ok) throw new Error(`Server error: ${response.status}`);
 
             const data = await response.json();
-
-            // Pretty-print JSON results
-            resultsDiv.innerHTML = `<pre>${JSON.stringify(data, null, 4)}</pre>`;
-        } catch (error) {
-            console.error(error);
-            resultsDiv.innerHTML = "<p style='color:red;'>An unexpected error occurred. Check console.</p>";
+            output.textContent = JSON.stringify(data, null, 4);
+        } catch (err) {
+            output.textContent = `An unexpected error occurred: ${err}`;
         }
     });
 });

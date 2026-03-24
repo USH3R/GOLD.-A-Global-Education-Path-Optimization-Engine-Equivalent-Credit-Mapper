@@ -1,4 +1,27 @@
-from flask import Flask, request, render_template_string, jsonify
+@app.route("/", methods=["GET", "POST"])
+def home():
+    result = None
+    if request.method == "POST":
+        degree_name = request.form.get("degree")
+        try:
+            # For now, we simulate user has taken no courses
+            courses_taken = []
+            degree_data = map_courses_to_degree(courses_taken, degree_name)
+
+            # Build a professional, multi-line string for display
+            result_lines = [
+                f"Degree: {degree_data.get('degree', 'Unknown')}",
+                "Courses Needed: " + ", ".join(degree_data.get('courses_needed', [])),
+                f"Total Credits: {degree_data.get('total_credits', 0)}",
+                f"Transferable Credits: {degree_data.get('transferable_credits', 0)}"
+            ]
+            result = "\n".join(result_lines)
+
+        except Exception as e:
+            # Fallback in case something goes wrong
+            result = f"Degree: {degree_name}\nCourses Needed: []\nTotal Credits: 0\nTransferable Credits: 0\nError: {str(e)}"
+
+    return render_template_string(HTML_TEMPLATE, degrees=DEGREE_OPTIONS, result=result)from flask import Flask, request, render_template_string, jsonify
 from mapper import map_courses_to_degree
 from degree_parser import load_degree
 

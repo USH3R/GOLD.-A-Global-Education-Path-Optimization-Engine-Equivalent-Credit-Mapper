@@ -1,7 +1,6 @@
 **Nine Files / Structure**  
   
 /GOLD.-A-Global-Education-Path-Optimization-Engine-Equivalent-Credit-Mapper  
-gold/  
 │  
 ├── README.md                 # Architecture, workflow, tech stack, modules, example data  
 ├── app.py                    # Flask web application (UI + backend)  

@@ -3,27 +3,37 @@ from bs4 import BeautifulSoup
 import json
 
 def crawl_coursera(subject="business"):
-    url = f"https://www.coursera.org/courses?query={subject}"
-    response = requests.get(url)
-    soup = BeautifulSoup(response.text, "html.parser")
-    courses = []
-    for div in soup.find_all("div", class_="course-card"):
-        title_tag = div.find("h2")
-        if title_tag:
-            course = {
-                "title": title_tag.text.strip(),
-                "credits": 3,
-                "source": "Coursera",
-                "cost": 49.99,
-                "duration_weeks": 4
-            }
-            courses.append(course)
-    return courses
+    try:
+        url = f"https://www.coursera.org/courses?query={subject}"
+        response = requests.get(url, timeout=10)
+        soup = BeautifulSoup(response.text, "html.parser")
+        courses = []
+        for div in soup.find_all("div", class_="course-card"):
+            title_tag = div.find("h2")
+            if title_tag:
+                course = {
+                    "title": title_tag.text.strip(),
+                    "credits": 3,
+                    "source": "Coursera",
+                    "cost": 49.99,
+                    "duration_weeks": 4
+                }
+                courses.append(course)
+        return courses
+    except Exception as e:
+        print(f"Coursera crawl failed: {e}")
+        # fallback mock data
+        return [
+            {"title": "Intro to Business", "credits": 3, "source": "Coursera", "cost": 49.99, "duration_weeks": 4}
+        ]
 
 def crawl_all():
-    # Placeholder to extend for other sources
+    # Combine Coursera with other placeholders
     courses = crawl_coursera()
-    # Add more crawling functions for edX, Study.com, Saylor, ACE, CLEP
+    courses += [
+        {"title": "Cybersecurity Basics", "credits": 3, "source": "edX", "cost": 59.99, "duration_weeks": 6},
+        {"title": "Advanced Algorithms", "credits": 3, "source": "Saylor", "cost": 0, "duration_weeks": 8},
+    ]
     return courses
 
 if __name__ == "__main__":

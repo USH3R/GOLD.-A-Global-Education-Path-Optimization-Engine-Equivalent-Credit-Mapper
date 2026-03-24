@@ -1,4 +1,55 @@
-def load_degree(user_input):
+# degree_parser.py
+# Handles loading and normalizing degree data
+
+# Sample degree database
+DEGREES = {
+    "business administration": {
+        "courses": [
+            "Business Management Basics",
+            "Operations Management",
+            "Introduction to Finance",
+            "Marketing Fundamentals",
+            "Principles of Accounting",
+            "Microeconomics"
+        ],
+        "transferable_credits": 3,
+        "duration_weeks": 4,
+        "cost": 0
+    },
+    "cybersecurity": {
+        "courses": [
+            "Introduction to Cybersecurity",
+            "Network Security Fundamentals",
+            "Operating Systems & Security",
+            "Ethical Hacking Basics",
+            "Cybersecurity Policy & Governance"
+        ],
+        "transferable_credits": 3,
+        "duration_weeks": 4,
+        "cost": 0
+    }
+    # Add more degrees here as needed
+}
+
+
+def normalize_degree(degree_name: str) -> str:
+    """
+    Normalize a user-provided degree string to match database keys.
+    Lowercase and strip whitespace.
+    """
+    return degree_name.strip().lower()
+
+
+def load_degree(degree_name: str) -> dict:
+    """
+    Return the degree info for a normalized degree name.
+    If not found, raise a KeyError.
+    """
+    normalized = normalize_degree(degree_name)
+    if normalized in DEGREES:
+        return DEGREES[normalized]
+    else:
+        raise KeyError(f"Degree '{degree_name}' not found in database.")def load_degree(user_input):
     """
     Build a degree dynamically based on user input
     """

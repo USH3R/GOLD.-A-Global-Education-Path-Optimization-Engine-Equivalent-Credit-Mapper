@@ -4,6 +4,43 @@ def map_courses_to_degree(courses, degree):
 
     keywords = degree.get("keywords", [])
 
+    print("DEBUG KEYWORDS:", keywords)
+
+    for course in courses:
+        title = course.get("title", "").lower()
+        print("CHECKING COURSE:", title)
+
+        match_score = 0
+
+        for keyword in keywords:
+            if keyword.lower() in title:
+                match_score += 1
+
+        print("MATCH SCORE:", match_score)
+
+        if match_score > 0:
+            mapped.append({
+                "title": course["title"],
+                "credits": course.get("credits", 3),
+                "cost": course.get("cost", 0),
+                "duration_weeks": course.get("duration_weeks", 0),
+                "score": match_score
+            })
+
+            transferable_credits += course.get("credits", 3)
+
+    print("MAPPED COURSES:", mapped)
+
+    return {
+        "degree": degree.get("name", "Unknown"),
+        "mapped_courses": mapped,
+        "transferable_credits": transferable_credits
+    }def map_courses_to_degree(courses, degree):
+    mapped = []
+    transferable_credits = 0
+
+    keywords = degree.get("keywords", [])
+
     for course in courses:
         title = course.get("title", "").lower()
 

@@ -1,4 +1,24 @@
 def load_degree():
+    return {
+        "name": "Business Administration",
+        "keywords": [
+            "business",
+            "management",
+            "finance",
+            "marketing",
+            "accounting",
+            "operations",
+            "economics"
+        ]
+    }
+
+
+def normalize_degree(degree):
+    # DO NOT strip keywords — just pass through clean
+    return {
+        "name": degree.get("name", "Unknown"),
+        "keywords": degree.get("keywords", [])
+    }def load_degree():
     """
     Returns a basic degree structure.
     This is a placeholder until we plug in real university data.

@@ -1,6 +1,23 @@
 from degree_parser import load_degree
 
 def map_courses_to_degree(degree_name):
+    degree_data = load_degree(degree_name)
+    if "error" in degree_data:
+        return {
+            "degree": degree_name,
+            "courses_needed": [],
+            "total_credits": 0,
+            "error": degree_data["error"]
+        }
+    courses = degree_data.get("courses", [])
+    total_credits = sum(c.get("credits", 0) for c in courses)
+    return {
+        "degree": degree_name,
+        "courses_needed": courses,
+        "total_credits": total_credits
+    }from degree_parser import load_degree
+
+def map_courses_to_degree(degree_name):
     """Return all courses for the requested degree."""
     degree_data = load_degree(degree_name)
     if "error" in degree_data:

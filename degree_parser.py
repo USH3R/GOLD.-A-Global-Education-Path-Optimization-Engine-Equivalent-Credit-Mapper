@@ -1,4 +1,39 @@
-# degreeparser.py
+def load_degree():
+    """
+    Returns a basic degree structure.
+    This is a placeholder until we plug in real university data.
+    """
+    return {
+        "name": "Business Administration",
+        "keywords": [
+            "business",
+            "management",
+            "finance",
+            "marketing",
+            "accounting",
+            "operations",
+            "economics"
+        ]
+    }
+
+
+def normalize_degree(degree):
+    """
+    Ensures consistent structure for downstream modules.
+    """
+    if not degree:
+        return {"name": "Unknown", "keywords": []}
+
+    name = degree.get("name", "Unknown")
+    keywords = degree.get("keywords", [])
+
+    # Normalize everything to lowercase
+    keywords = [k.lower() for k in keywords]
+
+    return {
+        "name": name,
+        "keywords": keywords
+    }# degreeparser.py
 
 # Placeholder database of degrees (could later scrape universities)
 DEGREE_DB = {

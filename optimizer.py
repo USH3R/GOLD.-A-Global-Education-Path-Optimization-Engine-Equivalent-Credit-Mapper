@@ -31,3 +31,4 @@ if __name__ == "__main__":
     }
     optimized = optimize_path(sample_mapped)
     print(json.dumps(optimized, indent=4))
+    

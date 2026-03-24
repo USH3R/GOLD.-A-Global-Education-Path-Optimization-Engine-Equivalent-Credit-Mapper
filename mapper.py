@@ -1,58 +1,43 @@
+# mapper.py
 from degree_parser import load_degree
 
-def map_courses_to_degree(degree_name):
+def map_courses_to_degree(courses_taken, degree_name):
     """
-    Map the loaded degree to the courses and return full stats.
+    Map the courses a student has taken to the target degree.
+    
+    Parameters:
+    - courses_taken: list of course names the student has completed
+    - degree_name: string of the target degree
+    
+    Returns:
+    A dictionary with:
+    - degree
+    - courses_needed
+    - total_credits
+    - transferable_credits
+    - error (if any)
     """
-    degree_data = load_degree(degree_name)
+    # Load full degree info
+    degree = load_degree(degree_name)
 
-    # Return immediately if error
-    if "error" in degree_data:
+    if "error" in degree:
         return {
             "degree": degree_name,
             "courses_needed": [],
             "total_credits": 0,
             "transferable_credits": 0,
-            "error": degree_data["error"]
+            "error": degree["error"]
         }
 
-    # Build the mapped response
-    mapped = degree_data.get("courses_needed", [])
-    total_credits = degree_data.get("total_credits", 0)
-    transferable_credits = degree_data.get("transferable_credits", 0)
+    # Determine which courses are still needed
+    courses_needed = [c for c in degree.get("courses", []) if c not in courses_taken]
+
+    # Mock transferable credits: count of courses already taken
+    transferable_credits = len([c for c in courses_taken if c in degree.get("courses", [])])
 
     return {
         "degree": degree_name,
-        "courses_needed": mapped,
-        "total_credits": total_credits,
-        "transferable_credits": transferable_credits
-    }# mapper.py
-from degree_parser import load_degree
-
-def map_courses_to_degree(degree_name):
-    """
-    Map the loaded degree to the courses and return full stats.
-    """
-    degree_data = load_degree(degree_name)
-
-    # If there's an error in loading, return immediately
-    if "error" in degree_data:
-        return {
-            "degree": degree_name,
-            "courses_needed": [],
-            "total_credits": 0,
-            "transferable_credits": 0,
-            "error": degree_data["error"]
-        }
-
-    # Build the mapped response
-    mapped = degree_data.get("courses_needed", [])
-    total_credits = degree_data.get("total_credits", 0)
-    transferable_credits = degree_data.get("transferable_credits", 0)
-
-    return {
-        "degree": degree_name,
-        "courses_needed": mapped,
-        "total_credits": total_credits,
+        "courses_needed": courses_needed,
+        "total_credits": len(degree.get("courses", [])),
         "transferable_credits": transferable_credits
     }

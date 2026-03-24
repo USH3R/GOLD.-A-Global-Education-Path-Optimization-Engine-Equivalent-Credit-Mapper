@@ -8,16 +8,16 @@
 <body>
     <div class="container">
         <h1>Gold: Education Path Optimizer</h1>
-        <form id="degreeForm">
+        <form id="degree-form">
             <label for="degree">Enter your target degree:</label>
-            <input type="text" id="degree" name="degree" required>
+            <input type="text" id="degree" name="degree" placeholder="e.g., MBA, Cybersecurity" required>
             <button type="submit">Optimize</button>
         </form>
-        <div id="result">
-            <h2>Optimization Result:</h2>
-            <pre id="jsonOutput">Enter a degree and click "Optimize" to see results.</pre>
-        </div>
+
+        <h2>Optimization Result:</h2>
+        <pre id="result">{}</pre>
     </div>
+
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

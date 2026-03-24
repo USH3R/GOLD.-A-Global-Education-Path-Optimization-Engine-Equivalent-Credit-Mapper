@@ -1,4 +1,88 @@
+# crawler.py
+
 def crawl_all():
+    """
+    Returns a static dataset of courses across multiple domains.
+    This avoids scraping issues and guarantees stability.
+    """
+
+    return [
+        # BUSINESS
+        {
+            "title": "Business Management Basics",
+            "category": "business",
+            "credits": 3,
+            "cost": 50,
+            "duration_weeks": 4
+        },
+        {
+            "title": "Marketing Fundamentals",
+            "category": "business",
+            "credits": 3,
+            "cost": 50,
+            "duration_weeks": 4
+        },
+        {
+            "title": "Principles of Accounting",
+            "category": "business",
+            "credits": 3,
+            "cost": 50,
+            "duration_weeks": 4
+        },
+        {
+            "title": "Operations Management",
+            "category": "business",
+            "credits": 3,
+            "cost": 50,
+            "duration_weeks": 4
+        },
+
+        # COMPUTER SCIENCE
+        {
+            "title": "Introduction to Programming",
+            "category": "computer_science",
+            "credits": 3,
+            "cost": 0,
+            "duration_weeks": 6
+        },
+        {
+            "title": "Data Structures",
+            "category": "computer_science",
+            "credits": 3,
+            "cost": 0,
+            "duration_weeks": 6
+        },
+        {
+            "title": "Algorithms",
+            "category": "computer_science",
+            "credits": 3,
+            "cost": 0,
+            "duration_weeks": 6
+        },
+
+        # CYBERSECURITY
+        {
+            "title": "Intro to Cybersecurity",
+            "category": "cybersecurity",
+            "credits": 3,
+            "cost": 0,
+            "duration_weeks": 5
+        },
+        {
+            "title": "Network Security",
+            "category": "cybersecurity",
+            "credits": 3,
+            "cost": 0,
+            "duration_weeks": 5
+        },
+        {
+            "title": "Ethical Hacking",
+            "category": "cybersecurity",
+            "credits": 3,
+            "cost": 0,
+            "duration_weeks": 6
+        }
+    ]def crawl_all():
     """
     Stable course dataset (no fragile scraping)
     """

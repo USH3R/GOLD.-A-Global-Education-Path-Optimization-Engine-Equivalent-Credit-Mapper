@@ -1,4 +1,26 @@
-from flask import Flask, render_template, request, jsonify
+# degreeparser.py
+
+def load_degree(degree_name=None):
+    """
+    Normally, this would parse a degree from a file or database.
+    For testing, we just return the normalized string.
+    """
+    if degree_name:
+        return degree_name.strip()
+    return "Business Administration"
+
+def normalize_degree(degree_name):
+    """
+    Normalize the degree name for consistent mapping.
+    """
+    degree_name = degree_name.lower().strip()
+    if "mba" in degree_name:
+        return "business administration"
+    if "cyber" in degree_name:
+        return "cybersecurity"
+    if "cs" in degree_name or "computer" in degree_name:
+        return "computer_science"
+    return degree_namefrom flask import Flask, render_template, request, jsonify
 
 from crawler import crawl_all
 from degreeparser import load_degree, normalize_degree

@@ -1,34 +1,21 @@
 **Nine Files / Structure**  
+  
+/GOLD.-A-Global-Education-Path-Optimization-Engine-Equivalent-Credit-Mapper  
 gold/  
 │  
 ├── README.md                 # Architecture, workflow, tech stack, modules, example data  
+├── app.py                    # Flask web application (UI + backend)  
 ├── crawler.py                # Crawls MOOCs, ACE/NCCRS, CLEP, Study.com, Saylor, etc.  
 ├── degree_parser.py          # Loads degree requirements & normalizes course names  
-├── mapping.py                # Maps courses to degree requirements, calculates credits  
+├── mapper.py                 # Maps courses to degree requirements, calculates credits  
 ├── optimizer.py              # Path optimization: max credits, min cost, min time  
-├── ui.py                     # Web dashboard or CLI for input/output  
 ├── config.json               # Configuration file: user constraints, API keys, settings  
 ├── static/  
 │   ├── style.css             # UI styling for web dashboard  
 │   └── script.js             # Frontend interactivity  
 └── data/  
+    ├── degrees.json          # Standardized degree JSON for mapper and parser  
     └── example_courses.json  # Sample JSON output from crawler for testing  
-
-/GOLD.-A-Global-Education-Path-Optimization-Engine-Equivalent-Credit-Mapper  
-│  
-├── templates/  
-│   └── index.html  
-├── static/  
-│   ├── style.css  
-│   └── script.js  
-├── ui.py  
-├── crawler.py  
-├── degreeparser.py  
-├── mapper.py  
-├── optimizer.py  
-├── config.py  
-├── run.sh  
-└── README.md  
 
 **File Purposes**  
     1. README.md – Provides overview:  

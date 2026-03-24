@@ -15,19 +15,19 @@ gold/
     └── example_courses.json  # Sample JSON output from crawler for testing  
 
 /GOLD.-A-Global-Education-Path-Optimization-Engine-Equivalent-Credit-Mapper  
-│
-├── templates/
-│   └── index.html
-├── static/
-│   ├── style.css
-│   └── script.js
-├── ui.py
-├── crawler.py
-├── degreeparser.py
-├── mapper.py
-├── optimizer.py
-├── config.py
-├── run.sh
+│  
+├── templates/  
+│   └── index.html  
+├── static/  
+│   ├── style.css  
+│   └── script.js  
+├── ui.py  
+├── crawler.py  
+├── degreeparser.py  
+├── mapper.py  
+├── optimizer.py  
+├── config.py  
+├── run.sh  
 └── README.md  
 
 **File Purposes**  

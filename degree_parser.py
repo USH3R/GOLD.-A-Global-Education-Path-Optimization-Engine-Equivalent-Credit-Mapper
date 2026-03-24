@@ -1,22 +1,35 @@
-# degree_parser.py
-def load_degree(degree_name="business administration"):
-    """
-    Load degree requirements for the specified degree.
-    Currently returns stub data; later can load real catalog info.
-    """
-    # Replace this stub with actual degree parsing from a catalog later
-    return {
-        "degree_name": degree_name,
-        "total_credits": 120,
+# degreeparser.py
+
+# Placeholder database of degrees (could later scrape universities)
+DEGREE_DB = {
+    "business administration": {
+        "degree_name": "Business Administration",
         "requirements": [
             {"category": "Core", "credits": 60, "courses": ["Intro to Business", "Accounting 101", "Management 101"]},
-            {"category": "Elective", "credits": 60, "courses": ["Marketing Basics", "Finance Fundamentals"]}
+            {"category": "Elective", "credits": 60, "courses": ["Marketing Basics", "Economics Basics"]}
+        ]
+    },
+    "mba": {
+        "degree_name": "MBA",
+        "requirements": [
+            {"category": "Core", "credits": 60, "courses": ["Finance", "Leadership", "Strategy"]},
+            {"category": "Elective", "credits": 60, "courses": ["Entrepreneurship", "Global Business"]}
         ]
     }
+}
 
-def normalize_degree(degree_data):
-    """
-    Normalize course names and requirements.
-    """
-    # For now, just pass through
-    return degree_data
+def load_degree(degree_name="business administration"):
+    # Return degree dict, defaulting to business admin
+    return DEGREE_DB.get(degree_name.lower(), DEGREE_DB["business administration"])
+
+def normalize_degree(degree):
+    # Just return as-is for now; could standardize course names
+    return {
+        "degree_name": degree["degree_name"],
+        "requirements": degree["requirements"]
+    }
+
+if __name__ == "__main__":
+    import json
+    d = normalize_degree(load_degree("MBA"))
+    print(json.dumps(d, indent=4))
